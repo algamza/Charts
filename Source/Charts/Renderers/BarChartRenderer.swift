@@ -40,6 +40,8 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     /// The ````internal```` specifier is to allow subclasses (HorizontalBar) to populate the same array
     internal lazy var accessibilityOrderedElements: [[NSUIAccessibilityElement]] = accessibilityCreateEmptyOrderedElements()
 
+    internal let barCornerRadius = CGFloat(5.0)
+    
     private typealias Buffer = [CGRect]
     
     @objc open weak var dataProvider: BarChartDataProvider?
@@ -351,7 +353,10 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 guard viewPortHandler.isInBoundsRight(barRect.origin.x) else { break }
 
                 context.setFillColor(dataSet.barShadowColor.cgColor)
-                context.fill(barRect)
+                //                context.fill(barRect)
+                let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: barCornerRadius)
+                context.addPath(bezierPath.cgPath)
+                context.drawPath(using: .fill)
             }
         }
         
@@ -379,7 +384,10 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 context.setFillColor(dataSet.color(atIndex: j).cgColor)
             }
             
-            context.fill(barRect)
+            let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: barCornerRadius)
+            context.addPath(bezierPath.cgPath)
+            context.drawPath(using: .fill)
+//            context.fill(barRect)
             
             if drawBorder
             {
@@ -743,8 +751,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 prepareBarHighlight(x: e.x, y1: y1, y2: y2, barWidthHalf: barData.barWidth / 2.0, trans: trans, rect: &barRect)
                 
                 setHighlightDrawPos(highlight: high, barRect: barRect)
+                let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: barCornerRadius)
+                context.addPath(bezierPath.cgPath)
                 
-                context.fill(barRect)
+                context.drawPath(using: .fill)
+//                context.fill(barRect)
             }
         }
     }

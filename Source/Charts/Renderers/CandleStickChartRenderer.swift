@@ -169,6 +169,9 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                     if dataSet.isDecreasingFilled
                     {
                         context.setFillColor(color.cgColor)
+                        let bezierPath = UIBezierPath(roundedRect: _bodyRect, cornerRadius: 5)
+                        context.addPath(bezierPath.cgPath)
+                        context.drawPath(using: .fill)
                         context.fill(_bodyRect)
                     }
                     else
@@ -186,7 +189,10 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                     if dataSet.isIncreasingFilled
                     {
                         context.setFillColor(color.cgColor)
-                        context.fill(_bodyRect)
+                        let bezierPath = UIBezierPath(roundedRect: _bodyRect, cornerRadius: 5)
+                        context.addPath(bezierPath.cgPath)
+                        context.drawPath(using: .fill)
+//                        context.fill(_bodyRect)
                     }
                     else
                     {
