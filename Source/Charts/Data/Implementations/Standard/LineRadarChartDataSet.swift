@@ -54,7 +54,7 @@ open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, LineRadarC
         }
         set
         {
-            _lineWidth = newValue.clamped(to: 0...10)
+            _lineWidth = newValue
         }
     }
     
