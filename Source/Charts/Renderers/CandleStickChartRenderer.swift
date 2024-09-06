@@ -153,7 +153,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                 
                 _bodyRect.origin.x = CGFloat(xPos) - 0.5 + barSpace
                 _bodyRect.origin.y = CGFloat(close * phaseY)
-                _bodyRect.size.width = (CGFloat(xPos) + 0.5 - barSpace) - _bodyRect.origin.x
+                _bodyRect.size.width = 0.4
                 _bodyRect.size.height = CGFloat(open * phaseY) - _bodyRect.origin.y
                 
                 trans.rectValueToPixel(&_bodyRect)
@@ -172,7 +172,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                         let bezierPath = UIBezierPath(roundedRect: _bodyRect, cornerRadius: 5)
                         context.addPath(bezierPath.cgPath)
                         context.drawPath(using: .fill)
-                        context.fill(_bodyRect)
+//                        context.fill(_bodyRect)
                     }
                     else
                     {
